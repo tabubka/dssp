@@ -1,0 +1,65 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+ type Query {
+  version: String
+  statuses: [Status] 
+  statusById(id: ID!): Status
+}
+
+type Mutation {
+  statusCreate(status: CreateStatusInput): Status
+  statusUpdate(status: UpdateStatusInput): Status
+  statusDelete(id: ID!):String
+}
+
+type Status {
+    id: ID!
+    createdAt: String 
+    updatedAt: String 
+    userId: String
+    statusTypeId: String
+    allDay: Boolean
+    startsAt: String
+    endsAt: String
+    message: String
+}
+
+type User { 
+ id: ID!
+ firstName: String!
+ lastName: String!
+ email: String!
+ nickname: String
+ phone: String
+}
+
+input CreateStatusInput {
+  id: ID!
+  user: UserInput
+}
+
+
+input UpdateStatusInput {
+  id: ID!
+  user: UserInput
+}
+
+input UserInput { 
+ id: ID!
+ firstName: String!
+ lastName: String!
+ email: String!
+ nickname: String
+ phone: String
+}
+
+enum StatusType {
+    OUT_OF_OFFICE,
+    REMOTE,
+    SICK,
+    VACATION,
+    BUSINESS_TRIP
+}
