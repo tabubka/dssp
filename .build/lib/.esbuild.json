@@ -1,0 +1,84 @@
+{
+  "inputs": {
+    "src/api/index.ts": {
+      "bytes": 4095,
+      "imports": []
+    },
+    "src/CognitoAuthRole.ts": {
+      "bytes": 1416,
+      "imports": []
+    },
+    "src/CognitoStack.ts": {
+      "bytes": 2324,
+      "imports": [
+        {
+          "path": "src/CognitoAuthRole.ts",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/DynamoDBStack.ts": {
+      "bytes": 1223,
+      "imports": []
+    },
+    "src/S3Stack.ts": {
+      "bytes": 853,
+      "imports": []
+    },
+    "lib/index.ts": {
+      "bytes": 736,
+      "imports": [
+        {
+          "path": "src/api/index.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/CognitoStack.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/DynamoDBStack.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/S3Stack.ts",
+          "kind": "import-statement"
+        }
+      ]
+    }
+  },
+  "outputs": {
+    ".build/lib/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 15868
+    },
+    ".build/lib/index.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "lib/index.ts",
+      "inputs": {
+        "lib/index.ts": {
+          "bytesInOutput": 494
+        },
+        "src/api/index.ts": {
+          "bytesInOutput": 3384
+        },
+        "src/CognitoStack.ts": {
+          "bytesInOutput": 1782
+        },
+        "src/CognitoAuthRole.ts": {
+          "bytesInOutput": 1184
+        },
+        "src/DynamoDBStack.ts": {
+          "bytesInOutput": 1128
+        },
+        "src/S3Stack.ts": {
+          "bytesInOutput": 727
+        }
+      },
+      "bytes": 10084
+    }
+  }
+}

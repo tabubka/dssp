@@ -1,56 +1,49 @@
-import * as path from 'path'
 import * as appsync from '@aws-cdk/aws-appsync'
-import * as lambda from '@aws-cdk/aws-lambda-nodejs'
-import * as cdk from '@aws-cdk/core'
 import * as _ from 'lodash'
+import * as sst from "@serverless-stack/resources";
+import * as cdk from "@aws-cdk/core";
+import * as dynamo from '@aws-cdk/aws-dynamodb'
+
 
 // EVENT
 
-const StatusByIdLambda = (scope: cdk.Construct) =>
-  new lambda.NodejsFunction(scope, 'StatusByIdLambda', {
-    entry: path.resolve(__dirname, 'status/statusById.ts'),
-    bundling: {
-      sourceMap: true,
-    },
+const StatusByIdLambda = (scope: sst.Stack, envVars: { [key: string]: string }) =>
+  new  sst.Function(scope, 'StatusByIdLambda', {
+    handler: "src/api/status/statusById.handler",
+    environment: envVars,
   })
 
-const StatusUpdateLambda = (scope: cdk.Construct) =>
-  new lambda.NodejsFunction(scope, 'StatusUpdateLambda', {
-    entry: path.resolve(__dirname, 'status/statusUpdate.ts'),
-    bundling: {
-      sourceMap: true,
-    },
+const StatusUpdateLambda = (scope: sst.Stack, envVars: { [key: string]: string }) =>
+  new sst.Function(scope, 'StatusUpdateLambda', {
+    handler: "src/api/status/statusUpdate.handler",
+    environment: envVars,
   })
 
-const StatusCreateLambda = (scope: cdk.Construct) =>
-  new lambda.NodejsFunction(scope, 'StatusCreateLambda', {
-    entry: path.resolve(__dirname, 'status/statusCreate.ts'),
-    bundling: {
-      sourceMap: true,
-    },
+const StatusCreateLambda = (scope: sst.Stack, envVars: { [key: string]: string }) =>
+  new sst.Function(scope, 'StatusCreateLambda', {
+    handler: "src/api/status/statusCreate.handler",
+    environment: envVars,
   })
 
-const StatusDeleteLambda = (scope: cdk.Construct) =>
-  new lambda.NodejsFunction(scope, 'StatusDeleteLambda', {
-    entry: path.resolve(__dirname, 'status/statusDelete.ts'),
-    bundling: {
-      sourceMap: true,
-    },
+const StatusDeleteLambda = (scope: sst.Stack, envVars: { [key: string]: string }) =>
+  new sst.Function(scope, 'StatusDeleteLambda', {
+    handler: "src/api/status/statusDelete.handler",
+    environment: envVars,
   })
 
 
 
-export const ResourceName = (logicalId: string, scope?: cdk.Construct) => {  
+export const ResourceName = (logicalId: string, scope?: sst.Stack) => {  
   let prefix = ''
   if (scope) {
-    const stack = cdk.Stack.of(scope)
+    const stack = sst.Stack.of(scope)
     prefix = `${stack.stackName}`
   }
 
   return `${prefix}-${logicalId}`
 }
 
-const GraphQLAPI = (scope: cdk.Construct) => {
+const GraphQLAPI = (scope: sst.Stack) => {
   const api = new appsync.GraphqlApi(scope, 'GraphQLAPI', {
     // name: 'Kork-PublicAPI',
     name: ResourceName('GraphQLAPI', scope),
@@ -65,7 +58,7 @@ const GraphQLAPI = (scope: cdk.Construct) => {
 }
 
 // ? auto-generate name?
-const useLambdaDataSource = (graphqlApi: appsync.GraphqlApi, lambdaFunction: lambda.NodejsFunction, fieldName: string, type: 'Query' | 'Mutation' = 'Query') =>
+const useLambdaDataSource = (graphqlApi: appsync.GraphqlApi, lambdaFunction: sst.Function, fieldName: string, type: 'Query' | 'Mutation' = 'Query') => {
   graphqlApi.addLambdaDataSource(
     `${_.upperFirst(fieldName)}DataSource`,
     lambdaFunction,
@@ -73,7 +66,8 @@ const useLambdaDataSource = (graphqlApi: appsync.GraphqlApi, lambdaFunction: lam
     typeName: type,
     fieldName,
   })
-
+  return lambdaFunction
+}
 
 const useVTLDataSource = (
   graphqlApi: appsync.GraphqlApi,
@@ -89,8 +83,12 @@ const useVTLDataSource = (
     responseMappingTemplate: appsync.MappingTemplate.fromString(responseMappingTemplate),
   })
 
-export const APIStack = (scope: cdk.Construct, props: cdk.StackProps) => {
-  const stack = new cdk.Stack(scope, 'DevDSSPAPI', props)
+  export interface APIStackProps extends sst.StackProps {
+    table: dynamo.Table
+  }
+
+export const APIStack = (scope: sst.App, props: APIStackProps) => {
+  const stack = new sst.Stack(scope, 'DevDSSPAPI', props)
 
   const graphqlApi = GraphQLAPI(stack)
 
@@ -98,10 +96,19 @@ export const APIStack = (scope: cdk.Construct, props: cdk.StackProps) => {
   // EventUpdateLambda(stack)
   // CommentSendLambda(stack)
 
-  useLambdaDataSource(graphqlApi, StatusByIdLambda(stack), 'statusById')
-  useLambdaDataSource(graphqlApi, StatusUpdateLambda(stack), 'statusUpdate', 'Mutation')
-  useLambdaDataSource(graphqlApi, StatusCreateLambda(stack), 'statusCreate', 'Mutation')
-  useLambdaDataSource(graphqlApi, StatusDeleteLambda(stack), 'statusDelete', 'Mutation')
+  const envVars = {
+    DYNAMODB_TABLE: props.table.tableName
+  }
+
+
+  props.table.grantReadData(
+  useLambdaDataSource(graphqlApi, StatusByIdLambda(stack, envVars), 'statusById'))
+  props.table.grantReadWriteData(
+  useLambdaDataSource(graphqlApi, StatusUpdateLambda(stack, envVars), 'statusUpdate', 'Mutation'))
+  props.table.grantReadWriteData(
+  useLambdaDataSource(graphqlApi, StatusCreateLambda(stack, envVars), 'statusCreate', 'Mutation'))
+  props.table.grantReadWriteData(
+  useLambdaDataSource(graphqlApi, StatusDeleteLambda(stack, envVars), 'statusDelete', 'Mutation'))
 
   useVTLDataSource(
     graphqlApi,

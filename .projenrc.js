@@ -1,11 +1,17 @@
 const { AwsCdkTypeScriptApp } = require('projen');
 
 const project = new AwsCdkTypeScriptApp({
-  cdkVersion: '1.92.0',
+  cdkVersion: '1.91.0',
+  cdkVersionPinning: true,
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkTypeScriptApp',
   name: 'dssp',
 
+  scripts: {
+    'sst-build': 'sst build',
+    'sst-deploy': 'sst deploy',
+    'sst-start': 'sst start',
+  },
   cdkDependencies: [
     '@aws-cdk/aws-appsync',
     '@aws-cdk/aws-cognito',
@@ -16,11 +22,22 @@ const project = new AwsCdkTypeScriptApp({
   ],
 
   deps: [
+    'aws-sdk',
     'lodash',
     '@types/lodash',
     'esbuild',
     'ulid',
+    '@serverless-stack/resources',
+    '@serverless-stack/cli',
+    'dynamodb-toolbox'
   ],
+
+  tsconfig: {
+    compilerOptions: {
+      'esModuleInterop': true,
+      'allowSyntheticDefaultImports': true
+    }
+  },
 
   eslint: false,
   /* AwsCdkTypeScriptAppOptions */

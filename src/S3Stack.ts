@@ -1,12 +1,12 @@
 import * as cdk from '@aws-cdk/core';
+import * as sst from "@serverless-stack/resources";
 import * as s3 from '@aws-cdk/aws-s3';
-import { Construct } from 'constructs';
 
-export default class S3Stack extends cdk.Stack {
+export default class S3Stack extends sst.Stack {
   // Public reference to the S3 bucket
   bucket;
 
-  constructor(scope: Construct | undefined, id: string | undefined, props: cdk.StackProps | undefined) {
+  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
 
     this.bucket = new s3.Bucket(this, 'Uploads', {

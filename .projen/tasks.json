@@ -33,6 +33,30 @@
       ],
       "condition": "git diff --exit-code > /dev/null"
     },
+    "sst-build": {
+      "name": "sst-build",
+      "steps": [
+        {
+          "exec": "sst build"
+        }
+      ]
+    },
+    "sst-deploy": {
+      "name": "sst-deploy",
+      "steps": [
+        {
+          "exec": "sst deploy"
+        }
+      ]
+    },
+    "sst-start": {
+      "name": "sst-start",
+      "steps": [
+        {
+          "exec": "sst start"
+        }
+      ]
+    },
     "compile": {
       "name": "compile",
       "category": "00.build",

@@ -1,20 +1,50 @@
 import 'source-map-support/register'
-// import { AppSyncResolverHandler } from 'aws-lambda'
+import { statusCreate } from '../../data/repos/status'
 
-// export const handler: AppSyncResolverHandler<InputType<UploadAbortInput>, UploadAbortPayload> = async (event) => {
-export const handler = async (status: any) => {
 
-  const { id  }: { id: any, } = status.arguments.input
+export const handler = async (event: any) => {
 
-  console.log('Status', status)
-  console.log('StatusID', id)
+  const status = event.arguments.status
 
-  /*
-  wss://mediarecorder.cinnamon.dev/fra/6128-rfmi-6hbw-zqu6
-  wss://mediarecorder.cinnamon.dev/6128-rfmi-6hbw-zqu6
-  wss://mediarecorder.cinnamon.dev/?streamkey=6128-rfmi-6hbw-zqu6
-  */
-  return {
-    id,
-  }
+  console.log('LambdaEvent', event)
+
+  const result = await statusCreate({
+    ...status 
+  })
+
+  console.log('DB', result)
+
+  return result
 }
+/*
+export async function handler() {
+  // Request body is passed in as a JSON encoded string in 'event.body'
+  const params = {
+    TableName: process.env.tableName!,
+    Item: {
+      id: String,
+     userId: String,
+     allDay: Boolean,
+     statusType: String,
+     createdAt: String,
+     updatedAt: String,
+     startsAt: String,
+     endsAt: String,
+     message: String
+    },
+  };
+
+  try {
+    await dynamoDb.put(params).promise();
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(params.Item),
+    };
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: e.message }),
+    };
+  }
+} */

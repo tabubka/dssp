@@ -6,52 +6,64 @@ schema {
  type Query {
   version: String
   statuses: [Status] 
-  statusById(id: ID!): Status
+  statusById(id: String): Status
 }
 
 type Mutation {
   statusCreate(status: CreateStatusInput): Status
-  statusUpdate(status: UpdateStatusInput): Status
-  statusDelete(id: ID!):String
+  statusUpdate(id: String, status: UpdateStatusInput): Status
+  statusDelete(id: String!):String
 }
 
 type Status {
-    id: ID!
+    id: String
     createdAt: String 
     updatedAt: String 
     userId: String
-    statusTypeId: String
+    statusType: String
     allDay: Boolean
-    startsAt: String
-    endsAt: String
+    startsAt: AWSDateTime
+    endsAt: AWSDateTime
     message: String
 }
 
 type User { 
- id: ID!
- firstName: String!
- lastName: String!
- email: String!
+ id: String
+ firstName: String
+ lastName: String
+ email: String
  nickname: String
  phone: String
+ status: UserStatus
+}
+
+enum UserStatus {
+  CREATED
+  ACTIVE
 }
 
 input CreateStatusInput {
-  id: ID!
-  user: UserInput
+    statusType: String
+    allDay: Boolean
+    startsAt: AWSDateTime
+    endsAt: AWSDateTime
+    message: String
 }
 
 
 input UpdateStatusInput {
-  id: ID!
-  user: UserInput
+  statusType: String
+    allDay: Boolean
+    startsAt: AWSDateTime
+    endsAt: AWSDateTime
+    message: String
 }
 
 input UserInput { 
- id: ID!
- firstName: String!
- lastName: String!
- email: String!
+ id: String
+ firstName: String
+ lastName: String
+ email: String
  nickname: String
  phone: String
 }

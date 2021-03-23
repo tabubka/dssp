@@ -1,0 +1,219 @@
+{
+  "inputs": {
+    "node_modules/source-map/lib/base64.js": {
+      "bytes": 1540,
+      "imports": []
+    },
+    "node_modules/source-map/lib/base64-vlq.js": {
+      "bytes": 4714,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/base64.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map/lib/util.js": {
+      "bytes": 12950,
+      "imports": []
+    },
+    "node_modules/source-map/lib/array-set.js": {
+      "bytes": 3197,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/util.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map/lib/mapping-list.js": {
+      "bytes": 2339,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/util.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map/lib/source-map-generator.js": {
+      "bytes": 14356,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/base64-vlq.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/util.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/array-set.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/mapping-list.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map/lib/binary-search.js": {
+      "bytes": 4249,
+      "imports": []
+    },
+    "node_modules/source-map/lib/quick-sort.js": {
+      "bytes": 3616,
+      "imports": []
+    },
+    "node_modules/source-map/lib/source-map-consumer.js": {
+      "bytes": 40562,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/util.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/binary-search.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/array-set.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/base64-vlq.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/quick-sort.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map/lib/source-node.js": {
+      "bytes": 13808,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/source-map-generator.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/util.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map/source-map.js": {
+      "bytes": 405,
+      "imports": [
+        {
+          "path": "node_modules/source-map/lib/source-map-generator.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/source-map-consumer.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/source-map/lib/source-node.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/buffer-from/index.js": {
+      "bytes": 1595,
+      "imports": []
+    },
+    "node_modules/source-map-support/source-map-support.js": {
+      "bytes": 19729,
+      "imports": [
+        {
+          "path": "node_modules/source-map/source-map.js",
+          "kind": "require-call"
+        },
+        {
+          "path": "node_modules/buffer-from/index.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "node_modules/source-map-support/register.js": {
+      "bytes": 25,
+      "imports": [
+        {
+          "path": "node_modules/source-map-support/source-map-support.js",
+          "kind": "require-call"
+        }
+      ]
+    },
+    "src/api/status/statusById.ts": {
+      "bytes": 500,
+      "imports": [
+        {
+          "path": "node_modules/source-map-support/register.js",
+          "kind": "import-statement"
+        }
+      ]
+    }
+  },
+  "outputs": {
+    "src/.build/src--api-status-statusById-handler-1615813462949/statusById.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 170165
+    },
+    "src/.build/src--api-status-statusById-handler-1615813462949/statusById.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/api/status/statusById.ts",
+      "inputs": {
+        "node_modules/source-map/lib/base64.js": {
+          "bytesInOutput": 1024
+        },
+        "node_modules/source-map/lib/base64-vlq.js": {
+          "bytesInOutput": 1563
+        },
+        "node_modules/source-map/lib/util.js": {
+          "bytesInOutput": 8163
+        },
+        "node_modules/source-map/lib/array-set.js": {
+          "bytesInOutput": 2088
+        },
+        "node_modules/source-map/lib/mapping-list.js": {
+          "bytesInOutput": 1261
+        },
+        "node_modules/source-map/lib/source-map-generator.js": {
+          "bytesInOutput": 10249
+        },
+        "node_modules/source-map/lib/binary-search.js": {
+          "bytesInOutput": 1385
+        },
+        "node_modules/source-map/lib/quick-sort.js": {
+          "bytesInOutput": 851
+        },
+        "node_modules/source-map/lib/source-map-consumer.js": {
+          "bytesInOutput": 22980
+        },
+        "node_modules/source-map/lib/source-node.js": {
+          "bytesInOutput": 9153
+        },
+        "node_modules/source-map/source-map.js": {
+          "bytesInOutput": 277
+        },
+        "node_modules/buffer-from/index.js": {
+          "bytesInOutput": 1709
+        },
+        "node_modules/source-map-support/source-map-support.js": {
+          "bytesInOutput": 14788
+        },
+        "src/api/status/statusById.ts": {
+          "bytesInOutput": 302
+        },
+        "node_modules/source-map-support/register.js": {
+          "bytesInOutput": 40
+        }
+      },
+      "bytes": 77012
+    }
+  }
+}

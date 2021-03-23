@@ -1,13 +1,13 @@
-import * as cdk from '@aws-cdk/core';
+import * as sst from "@serverless-stack/resources";
+import * as cdk from '@aws-cdk/core'
 import * as iam from '@aws-cdk/aws-iam';
 import * as cognito from '@aws-cdk/aws-cognito';
-import { Construct } from 'constructs';
 
 export default class CognitoAuthRole extends cdk.Construct {
   // Public reference to the IAM role
   role;
 
-  constructor(scope: Construct, id: string, props: { identityPool: any; }) {
+  constructor(scope: sst.Stack, id: string, props: { identityPool: any; }) {
     super(scope, id);
 
     const { identityPool } = props;
