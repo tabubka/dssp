@@ -1,19 +1,17 @@
 import 'source-map-support/register'
-// import { AppSyncResolverHandler } from 'aws-lambda'
+import { statusById } from '../../data/repos/status'
+//import { AppSyncResolverHandler } from 'aws-lambda'
 // import { ulid } from 'ulid'
+export const handler = async (event: any) => {
 
-// export const handler: AppSyncResolverHandler<InputType<UploadAbortInput>, UploadAbortPayload> = async (event) => {
-export const handler = async (status: any) => {
+  const { id }: { id: string } = event.arguments
 
-  const { id }: { id: string } = status.arguments
+  console.log('LambdaEvent', event)
+  console.log('EventID', id)
 
-  console.log('Status', status)
-  console.log('StatusID', id)
+  const sts = await statusById(id)
 
-  return {
-    id,
-    nickname: 'Unnamed',
-    about: 'status',
-    startAt: new Date(),
-  }
+  console.log('Status', sts)
+
+  return sts
 }

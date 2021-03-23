@@ -1,27 +1,42 @@
-import * as cdk from '@aws-cdk/core';
+import * as sst from "@serverless-stack/resources";
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import { CfnOutput } from '@aws-cdk/core';
-import { Construct } from 'constructs';
+import { AttributeType } from '@aws-cdk/aws-dynamodb'
 
-export default class DynamoDBStack extends cdk.Stack {
-  constructor(scope: Construct | undefined, id: string | undefined, props: cdk.StackProps | undefined) {
+export default class DynamoDBStack extends sst.Stack {
+  public table: dynamodb.Table
+
+  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
 
     //const app = this.node.root;
 
-    const table = new dynamodb.Table(this, 'Table', {
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST, // Use on-demand billing mode
-      sortKey: { name: 'statusId', type: dynamodb.AttributeType.STRING },
-      partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
+    this.table = new dynamodb.Table(this, 'Table', {
+      sortKey: { name: 'SK', type: dynamodb.AttributeType.STRING },
+      partitionKey: { name: 'PK', type: dynamodb.AttributeType.STRING },
     });
+
+    const index = 1;
+
+    this.table.addGlobalSecondaryIndex({
+      indexName: `GSI${index}`,
+      partitionKey: { 
+        name: `GSI${index}PK`,
+        type: AttributeType.STRING,
+      },
+      sortKey: {
+        name: `GSI${index}SK`,
+        type: AttributeType.STRING,
+    }
+  });
 
     // Output values
     new CfnOutput(this, 'TableName', {
-      value: table.tableName,
+      value: this.table.tableName,
       // exportName: // app.logicalPrefixedName('TableName'),
     });
     new CfnOutput(this, 'TableArn', {
-      value: table.tableArn,
+      value: this.table.tableArn,
       // exportName: app.logicalPrefixedName('TableArn'),
     });
   }

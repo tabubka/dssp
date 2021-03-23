@@ -1,16 +1,16 @@
-import * as cdk from '@aws-cdk/core';
+import * as sst from "@serverless-stack/resources";
 import { CfnOutput } from '@aws-cdk/core';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cognito from '@aws-cdk/aws-cognito';
 import CognitoAuthRole from './CognitoAuthRole';
-import { Construct } from 'constructs';
+import * as cdk from "@aws-cdk/core";
 
-interface CognitoStackProps extends cdk.StackProps {
+interface CognitoStackProps extends sst.StackProps {
   bucketArn: string
 }
 
-export default class CognitoStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: CognitoStackProps) {
+export default class CognitoStack extends sst.Stack {
+  constructor(scope: sst.App, id: string, props: CognitoStackProps) {
     super(scope, id, props);
 
     const { bucketArn } = props;
@@ -28,7 +28,7 @@ export default class CognitoStack extends cdk.Stack {
       generateSecret: false, // Don't need to generate secret for web app running on browsers
     });
 
-    const identityPool = new cognito.CfnIdentityPool(this, 'IdentityPool', {
+    const identityPool = new cognito.CfnIdentityPool(this as any as cdk.Construct, 'IdentityPool', {
       allowUnauthenticatedIdentities: false, // Don't allow unathenticated users
       cognitoIdentityProviders: [
         {
