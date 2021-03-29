@@ -156,13 +156,13 @@
     }
   },
   "outputs": {
-    ".build/src-api-status-statusDelete-handler-1616409653973/statusDelete.js.map": {
+    ".build/src-api-status-statusDelete-handler-1617017260411/statusDelete.js.map": {
       "imports": [],
       "exports": [],
       "inputs": {},
       "bytes": 170000
     },
-    ".build/src-api-status-statusDelete-handler-1616409653973/statusDelete.js": {
+    ".build/src-api-status-statusDelete-handler-1617017260411/statusDelete.js": {
       "imports": [],
       "exports": [],
       "entryPoint": "src/api/status/statusDelete.ts",

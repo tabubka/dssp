@@ -33,6 +33,10 @@ var appsync = __toModule(require("@aws-cdk/aws-appsync"));
 var _ = __toModule(require("lodash"));
 var sst = __toModule(require("@serverless-stack/resources"));
 var cdk = __toModule(require("@aws-cdk/core"));
+var StatusListLambda = (scope, envVars) => new sst.Function(scope, "StatusListLanbda", {
+  handler: "src/api/status/statusList.handler",
+  environment: envVars
+});
 var StatusByIdLambda = (scope, envVars) => new sst.Function(scope, "StatusByIdLambda", {
   handler: "src/api/status/statusById.handler",
   environment: envVars
@@ -88,6 +92,7 @@ var APIStack = (scope, props2) => {
   const envVars = {
     DYNAMODB_TABLE: props2.table.tableName
   };
+  props2.table.grantReadData(useLambdaDataSource(graphqlApi, StatusListLambda(stack, envVars), "statusList"));
   props2.table.grantReadData(useLambdaDataSource(graphqlApi, StatusByIdLambda(stack, envVars), "statusById"));
   props2.table.grantReadWriteData(useLambdaDataSource(graphqlApi, StatusUpdateLambda(stack, envVars), "statusUpdate", "Mutation"));
   props2.table.grantReadWriteData(useLambdaDataSource(graphqlApi, StatusCreateLambda(stack, envVars), "statusCreate", "Mutation"));

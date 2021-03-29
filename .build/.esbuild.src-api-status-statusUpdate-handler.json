@@ -382,7 +382,7 @@
       ]
     },
     "src/data/table.ts": {
-      "bytes": 264,
+      "bytes": 362,
       "imports": [
         {
           "path": "node_modules/dynamodb-toolbox/dist/index.js",
@@ -391,7 +391,7 @@
       ]
     },
     "src/data/entities/status.ts": {
-      "bytes": 1249,
+      "bytes": 1248,
       "imports": [
         {
           "path": "node_modules/dynamodb-toolbox/dist/index.js",
@@ -408,7 +408,7 @@
       "imports": []
     },
     "src/data/repos/status.ts": {
-      "bytes": 1127,
+      "bytes": 1701,
       "imports": [
         {
           "path": "src/data/entities/status.ts",
@@ -435,13 +435,13 @@
     }
   },
   "outputs": {
-    ".build/src-api-status-statusUpdate-handler-1616409653625/statusUpdate.js.map": {
+    ".build/src-api-status-statusUpdate-handler-1617017259959/statusUpdate.js.map": {
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 400609
+      "bytes": 401371
     },
-    ".build/src-api-status-statusUpdate-handler-1616409653625/statusUpdate.js": {
+    ".build/src-api-status-statusUpdate-handler-1617017259959/statusUpdate.js": {
       "imports": [],
       "exports": [],
       "entryPoint": "src/api/status/statusUpdate.ts",
@@ -546,16 +546,16 @@
           "bytesInOutput": 40
         },
         "src/data/entities/status.ts": {
-          "bytesInOutput": 1126
+          "bytesInOutput": 1124
         },
         "src/data/table.ts": {
-          "bytesInOutput": 322
+          "bytesInOutput": 412
         },
         "src/data/repos/status.ts": {
           "bytesInOutput": 465
         }
       },
-      "bytes": 194164
+      "bytes": 194252
     }
   }
 }

@@ -11,6 +11,25 @@ export const statusById = async (id: string) => {
   }
 
 
+export const statusList = async () => {
+
+  const result = await Status.query(
+    'STATUS', // partition key
+    {
+      limit: 50, // limit to 50 items
+      beginsWith: 'STATUS', // select items where sort key begins with value
+      reverse: true, // return items in descending order (newest first)
+      capacity: 'indexes', // return the total capacity consumed by the indexes
+      index: 'GSI1' // query the GSI1 secondary index
+    }
+  )
+  if (!result) {
+    throw new Error(`Statuses not found`)
+  }
+  console.log('DB::statusList', result)
+  return result.Items
+}
+
 export const statusCreate = async (data: Partial<IStatus>) => {
 
     //Change to UUID V4

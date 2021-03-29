@@ -382,7 +382,7 @@
       ]
     },
     "src/data/table.ts": {
-      "bytes": 264,
+      "bytes": 362,
       "imports": [
         {
           "path": "node_modules/dynamodb-toolbox/dist/index.js",
@@ -391,7 +391,7 @@
       ]
     },
     "src/data/entities/status.ts": {
-      "bytes": 1249,
+      "bytes": 1248,
       "imports": [
         {
           "path": "node_modules/dynamodb-toolbox/dist/index.js",
@@ -408,7 +408,7 @@
       "imports": []
     },
     "src/data/repos/status.ts": {
-      "bytes": 1127,
+      "bytes": 1701,
       "imports": [
         {
           "path": "src/data/entities/status.ts",
@@ -435,13 +435,13 @@
     }
   },
   "outputs": {
-    ".build/src-api-status-statusById-handler-1616409653170/statusById.js.map": {
+    ".build/src-api-status-statusById-handler-1617017259737/statusById.js.map": {
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 400087
+      "bytes": 400849
     },
-    ".build/src-api-status-statusById-handler-1616409653170/statusById.js": {
+    ".build/src-api-status-statusById-handler-1617017259737/statusById.js": {
       "imports": [],
       "exports": [],
       "entryPoint": "src/api/status/statusById.ts",
@@ -546,16 +546,16 @@
           "bytesInOutput": 40
         },
         "src/data/entities/status.ts": {
-          "bytesInOutput": 1126
+          "bytesInOutput": 1124
         },
         "src/data/table.ts": {
-          "bytesInOutput": 322
+          "bytesInOutput": 412
         },
         "src/data/repos/status.ts": {
           "bytesInOutput": 261
         }
       },
-      "bytes": 193833
+      "bytes": 193921
     }
   }
 }

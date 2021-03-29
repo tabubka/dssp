@@ -1,7 +1,7 @@
 {
   "inputs": {
     "src/api/index.ts": {
-      "bytes": 4095,
+      "bytes": 4400,
       "imports": []
     },
     "src/CognitoAuthRole.ts": {
@@ -52,7 +52,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 15868
+      "bytes": 16322
     },
     ".build/lib/index.js": {
       "imports": [],
@@ -63,7 +63,7 @@
           "bytesInOutput": 494
         },
         "src/api/index.ts": {
-          "bytesInOutput": 3384
+          "bytesInOutput": 3659
         },
         "src/CognitoStack.ts": {
           "bytesInOutput": 1782
@@ -78,7 +78,7 @@
           "bytesInOutput": 727
         }
       },
-      "bytes": 10084
+      "bytes": 10359
     }
   }
 }
