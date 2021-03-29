@@ -5,7 +5,11 @@ import * as cdk from "@aws-cdk/core";
 import * as dynamo from '@aws-cdk/aws-dynamodb'
 
 
-// EVENT
+const StatusListLambda = (scope: sst.Stack, envVars: { [key: string]: string}) =>
+new sst.Function(scope, 'StatusListLanbda', {
+  handler: "src/api/status/statusList.handler",
+  environment: envVars,
+})
 
 const StatusByIdLambda = (scope: sst.Stack, envVars: { [key: string]: string }) =>
   new  sst.Function(scope, 'StatusByIdLambda', {
@@ -100,7 +104,8 @@ export const APIStack = (scope: sst.App, props: APIStackProps) => {
     DYNAMODB_TABLE: props.table.tableName
   }
 
-
+  props.table.grantReadData(
+  useLambdaDataSource(graphqlApi, StatusListLambda(stack, envVars), 'statusList'))
   props.table.grantReadData(
   useLambdaDataSource(graphqlApi, StatusByIdLambda(stack, envVars), 'statusById'))
   props.table.grantReadWriteData(

@@ -28,13 +28,13 @@ export const Status = new Entity<IStatus>({
     
 
     attributes: {
-        PK: { hidden: true, partitionKey: true, default: ()=> "STATUS"},
-        SK: { hidden: true, sortKey: true, prefix: "STATUS",  default: (data: IStatus) => data.id},
+        PK: { hidden: true, partitionKey: true, prefix: "STATUS#"},
+        SK: { hidden: true, sortKey: true, prefix: "STATUS#",  default: (data: IStatus) => data.id},
         GSI1PK: { hidden: true, partitionKey: 'GSI1', default: ()=> "STATUS"},
-        GSI1SK: { hidden: true, sortKey: 'GSI1', prefix: "DATE", default: (data: IStatus) => data.endsAt},
+        GSI1SK: { hidden: true, sortKey: 'GSI1', prefix: "STATUS#", default: (data: IStatus) => data.endsAt},
 
 
-        id: ['SK', 0],
+        id: ['PK', 0],
 
         // orgId: 
 

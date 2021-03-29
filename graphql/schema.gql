@@ -5,7 +5,7 @@ schema {
 
  type Query {
   version: String
-  statuses: [Status] 
+  statusList: [Status]
   statusById(id: String): Status
 }
 
@@ -26,6 +26,7 @@ type Status {
     endsAt: AWSDateTime
     message: String
 }
+
 
 type User { 
  id: String
@@ -67,6 +68,8 @@ input UserInput {
  nickname: String
  phone: String
 }
+
+
 
 enum StatusType {
     OUT_OF_OFFICE,

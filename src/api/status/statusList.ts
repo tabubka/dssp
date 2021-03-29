@@ -1,5 +1,5 @@
 import 'source-map-support/register'
-import { statusById } from '../../data/repos/status'
+import { statusList } from '../../data/repos/status'
 
 export const handler = async (event: any) => {
 
@@ -8,7 +8,7 @@ export const handler = async (event: any) => {
   console.log('LambdaEvent', event)
   console.log('EventID', id)
 
-  const sts = await statusById(id)
+  const sts = await statusList()
 
   console.log('Status', sts)
 

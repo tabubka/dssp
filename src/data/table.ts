@@ -8,6 +8,13 @@ export const table = new Table({
 
   partitionKey: 'PK',
   sortKey: 'SK',
+
+  indexes: {
+    GSI1: {
+        partitionKey: 'GSI1PK',
+        sortKey: 'GSI1SK',
+      }
+  },
   
   DocumentClient,
 })
